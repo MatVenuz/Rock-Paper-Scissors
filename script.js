@@ -1,8 +1,23 @@
-const computerSelection = computerPlay();
+const buttonSelection = document.querySelectorAll(".button-class");
+const playerValue = document.getElementById("player-value")
+const computerValue = document.getElementById("computer-value")
+const replayDiv = document.getElementById("repeat")
+const replayButton = document.getElementById("repeat-button")
+/* no idea why i can't add/remove attributes at the same time, so i do one by one */
+const rock = document.getElementById("rock")
+const paper = document.getElementById("paper")
+const scissors = document.getElementById("scissors") 
 
+/* player selection */
+buttonSelection.forEach((button) => {
+    button.addEventListener("click", () => {
+        playRound(button.id,computerPlay())
+    });
+});
+
+/* computer selection */
 function computerPlay() {
     let value = Math.round(Math.random() * 2) + 1
-
     if (value === 1) {
         return "rock"
     }
@@ -10,66 +25,97 @@ function computerPlay() {
         return "paper"
     }
     else {return "scissors"}
-}
+ }
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection.toLowerCase() == "rock" && computerSelection == "rock") {
-        console.log("Tie!");
-        return "tie";
-    }
-    else if (playerSelection.toLowerCase() == "rock" && computerSelection == "paper") {
-        console.log("You lose!, Paper beats Rock!")
-        return "lose";
-    }
-    else if (playerSelection.toLowerCase() == "rock" && computerSelection == "scissors") {
-        console.log("You win!, Rock beats Scissors!")
-        return "win";
-    }
-    else if (playerSelection.toLowerCase() == "paper" && computerSelection == "rock") {
-        console.log("You win!, Paper beats Rock!")
-        return "win";
-    }
-    else if (playerSelection.toLowerCase() == "paper" && computerSelection == "paper") {
-        console.log("Tie!")
-        return "tie";
-    }
-    else if (playerSelection.toLowerCase() == "paper" && computerSelection == "scissors") {
-        console.log("You lose!, Scissors beats Paper!")
-        return "lose";
-    }
-    else if (playerSelection.toLowerCase() == "scissors" && computerSelection == "rock") {
-        console.log("You lose!, Scissors beats Paper");
-        return "lose";
-    }
-    else if (playerSelection.toLowerCase() == "scissors" && computerSelection == "paper") {
-        console.log("You win!, Scissors beats Paper");
-        return "win";
-    }
-    else if (playerSelection.toLowerCase() == "scissors" && computerSelection == "scissors") {
-        console.log("Tie!");
-        return "tie";
-    }
-    else {console.warn("That's not a valid option!")}
-}
-
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let selection = prompt("Rock, Paper or Scissors?")
-
-        const playerSelection = selection;
-
-        if (selection.toLowerCase() == "rock") {
-        selection = "rock"
+/* game rounds */
+function playRound(playerSelection, computerPlay) {
+    if (playerSelection == "rock") {
+        if (computerPlay == "rock") {
+            tie(playerSelection,computerPlay)
         }
-        else if (selection.toLowerCase() == "paper") {
-        selection = "paper"
+        else if (computerPlay == "paper") {
+            lose(playerSelection,computerPlay)
         }
-        else if (selection.toLowerCase() == "scissors") {
-            selection = "scissors"
+        else {victory(playerSelection,computerPlay)}
+    }
+    else if (playerSelection == "paper") {
+        if (computerPlay == "rock") {
+            victory(playerSelection,computerPlay)
         }
-        
-        playRound(playerSelection, computerSelection)
+        else if (computerPlay == "paper") {
+            tie(playerSelection,computerPlay)
+        }
+        else {lose(playerSelection,computerPlay)}
+    }
+    else {
+        if (computerPlay == "rock") {
+            lose(playerSelection,computerPlay)
+        }
+        else if (computerPlay == "paper") {
+            victory(playerSelection,computerPlay)
+        }
+        else {tie(playerSelection,computerPlay)}
     }
 }
 
-game();
+/* result of every round */
+victory = (playerSelection,computerPlay) => {
+    results.innerHTML = `You win!, ${playerSelection} beats ${computerPlay}`
+    matchPoints(1,0)
+}
+
+lose = (playerSelection,computerPlay) => {
+    results.innerHTML = `You lose!, ${computerPlay} beats ${playerSelection}`
+    matchPoints(0,1)
+}
+
+tie = (playerSelection,computerPlay) => {
+    results.innerHTML = `Tie!, your power is equal to Delirium!`
+}
+
+/* points counter */
+let pPoints = 0;
+let cPoints = 0;
+
+function matchPoints (playerPoints, computerPoints) {
+    if (playerPoints > computerPoints) {
+        pPoints++
+        playerValue.innerHTML = `${pPoints}`
+    }
+    else if(playerPoints < computerPoints) {
+        cPoints++
+        computerValue.innerHTML = `${cPoints}`
+    }
+    matchStatus(playerPoints,computerPoints)
+}
+
+/* match result */
+function matchStatus(playerPoints,computerPoints) {
+    if (pPoints == 5) {
+        results.innerHTML = "Congratulations!, you finally beat Delirium";
+        rock.setAttribute("disabled","disabled");
+        paper.setAttribute("disabled","disabled");
+        scissors.setAttribute("disabled","disabled");
+        replayDiv.style.display = "flex";
+    }
+    else if(cPoints == 5) {
+        results.innerHTML = "I'm so sorry, Delirium instantly teleport above you and you die :(";
+        rock.setAttribute("disabled","disabled");
+        paper.setAttribute("disabled","disabled");
+        scissors.setAttribute("disabled","disabled");
+        replayDiv.style.display = "flex";
+    }
+}
+
+/* reset button */
+replayButton.addEventListener("click",() => {
+    pPoints = 0
+    cPoints = 0
+    playerValue.innerHTML = "0"
+    computerValue.innerHTML = "0"
+    results.innerHTML = "Select your item"
+    replayDiv.style.display = "none"
+    rock.removeAttribute("disabled");
+    paper.removeAttribute("disabled");
+    scissors.removeAttribute("disabled");
+})

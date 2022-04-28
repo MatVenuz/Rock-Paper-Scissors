@@ -3,12 +3,33 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>RPS</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src='script.js'></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" href="./images/Thelost.png">
 </head>
 <body>
-    <h1>See the results in console!</h1>
-    <p>press f12 to see it.</p>
+    <h1>The Void</h1>
+    <div id="selection">
+        <button class="button-class" id="rock">ROCK</button>
+        <button class="button-class" id="paper">PAPER</button>
+        <button class="button-class" id="scissors">SCISSORS</button>
+    </div>
+    <div id="results">Select your item</div>
+    <div id="match-value">
+        <div id="isaac">
+            <p>ISAAC</p>
+            <div id="player-value">0</div>
+        </div>
+        <div id="delirium">
+            <p>DELIRIUM</p>
+            <div id="computer-value">0</div>
+        </div>
+    </div>
+    <div id="repeat">
+        <h2>Try again?</h2>
+        <button id="repeat-button">Yes</button>
+    </div>
+    <script src='script.js'></script>
 </body>
 </html>

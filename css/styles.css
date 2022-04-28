@@ -1,0 +1,124 @@
+* {
+    padding: 0;
+    margin: 0;
+    color: var(--white)
+}
+
+:root {
+    --white: #ffffff;
+    --black: #000000;
+    --red: #ff0000;
+    --gray: #666666
+}
+
+@font-face {
+    src: url(../font/upheavtt.ttf);
+    font-family: "upheaval_tt_brkregular";
+}
+
+body {
+    background: url(../images/theVoid.jpg) no-repeat center center fixed;
+    background-size: cover;
+    font-family: "upheaval_tt_brkregular","Times New Roman", Arial;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 8em;
+    height: 30vh;
+}
+
+#selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--black);
+    height: 20vh;
+}
+
+#selection > button {
+    font-family: "upheaval_tt_brkregular";
+    font-size: 40px;
+    color: var(--black);
+    width: 200px;
+    height: 100px;
+    border: none;
+    border-radius: 50px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#selection > button:hover{
+    transform: scale(1.1);
+}
+
+#selection > button:active {
+    background-color: #ff0000;
+    box-shadow: 0 5px var(--gray);
+    transform: translateY(4px);
+}
+
+#results {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 3em;
+    max-width: 800px;
+    margin: auto;
+    height: 20vh;
+    max-height: 140px;
+}
+
+#match-value {
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#isaac {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+}
+
+#delirium {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+}
+
+#repeat {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    height: 20vh;
+}
+
+#repeat-button {
+    font-size: 1.5em;
+    font-family: "upheaval_tt_brkregular";
+    color: var(--black);
+    border-radius: 30px;
+    width: 120px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#repeat-button:hover {
+    transform: scale(1.1);
+}
+
+#repeat-button:active {
+    background-color: #ff0000;
+    box-shadow: 0 5px var(--gray);
+    transform: translateY(4px);
+}
